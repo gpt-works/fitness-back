@@ -6,7 +6,6 @@ import java.util.concurrent.Executor;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,17 +28,13 @@ public class ProgramController {
       @RequestParam("height") @Min(0) int height,
       @RequestParam("desiredLoss") @Min(0) int desiredLoss,
       @RequestParam("email") @Email String email) {
-    try {
-      executor.execute(() -> stdCGPTConnectorService.fullRequest(FitnessData.builder()
-          .weight(weight)
-          .height(height)
-          .desiredLoss(desiredLoss)
-          .email(email)
-          .build()));
-      return ResponseEntity.ok().build();
-    } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-    }
+    executor.execute(() -> stdCGPTConnectorService.fullRequest(FitnessData.builder()
+        .weight(weight)
+        .height(height)
+        .desiredLoss(desiredLoss)
+        .email(email)
+        .build()));
+    return ResponseEntity.ok().build();
   }
 
 }
