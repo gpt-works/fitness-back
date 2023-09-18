@@ -3,7 +3,10 @@ package com.zonief.fitnessback.controller;
 import com.zonief.fitnessback.beans.FitnessData;
 import com.zonief.fitnessback.service.StdCGPTConnectorService;
 import java.util.concurrent.Executor;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,19 +22,24 @@ public class ProgramController {
 
 
   private final StdCGPTConnectorService stdCGPTConnectorService;
-  Executor executor;
+  private final Executor executor;
 
   @GetMapping("/ask/all")
-  public ResponseEntity<String> askSportQuestion(@RequestParam("weight") int weight,
-      @RequestParam("height") int height, @RequestParam("desiredLoss") int desiredLoss,
-      @RequestParam("email") String email) {
-    executor.execute(() -> stdCGPTConnectorService.fullRequest(FitnessData.builder()
-        .weight(weight)
-        .height(height)
-        .desiredLoss(desiredLoss)
-        .email(email)
-        .build()));
-    return ResponseEntity.ok("OK");
+  public ResponseEntity<Void> askSportQuestion(@RequestParam("weight") @Min(0) int weight,
+      @RequestParam("height") @Min(0) int height,
+      @RequestParam("desiredLoss") @Min(0) int desiredLoss,
+      @RequestParam("email") @Email String email) {
+    try {
+      executor.execute(() -> stdCGPTConnectorService.fullRequest(FitnessData.builder()
+          .weight(weight)
+          .height(height)
+          .desiredLoss(desiredLoss)
+          .email(email)
+          .build()));
+      return ResponseEntity.ok().build();
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
   }
 
 }
