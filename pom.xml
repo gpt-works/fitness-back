@@ -16,35 +16,39 @@
   <description>fitness-back</description>
   <properties>
     <java.version>20</java.version>
+    <gpt-connector-commons.version>0.0.1-SNAPSHOT</gpt-connector-commons.version>
+    <validation-api.version>2.0.1.Final</validation-api.version>
+    <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
+    <angus-mail.version>2.0.2</angus-mail.version>
   </properties>
   <dependencies>
     <!-- FITNESS -->
     <dependency>
       <groupId>com.zonief</groupId>
       <artifactId>gpt-connector-commons</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>${gpt-connector-commons.version}</version>
     </dependency>
     <!-- SPRING -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
+      <artifactId>spring-boot-starter-webflux</artifactId>
     </dependency>
     <!-- Validation -->
     <dependency>
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
-      <version>2.0.1.Final</version>
+      <version>${validation-api.version}</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
-      <version>8.0.1.Final</version>
+      <version>${hibernate-validator.version}</version>
     </dependency>
     <!-- EMAIL -->
     <dependency>
       <groupId>org.eclipse.angus</groupId>
       <artifactId>angus-mail</artifactId>
-      <version>2.0.2</version>
+      <version>${angus-mail.version}</version>
     </dependency>
     <!-- SUGAR -->
     <dependency>

@@ -24,15 +24,21 @@ public class EmailConfig {
   private String username;
   @Value("${email.password}")
   private String password;
+  @Value("${email.smtp.host}")
+  private String host;
+  @Value("${email.smtp.ssl.trust}")
+  private String sslTrust;
+  @Value("${email.smtp.port}")
+  private String port;
 
   @Bean(name = "emailProperties")
   public Properties properties() {
     Properties properties = new Properties();
     properties.put("mail.smtp.auth", true);
     properties.put("mail.smtp.starttls.enable", true);
-    properties.put("mail.smtp.host", "smtp.mailtrap.io");
-    properties.put("mail.smtp.port", "25");
-    properties.put("mail.smtp.ssl.trust", "smtp.mailtrap.io");
+    properties.put("mail.smtp.host", host);
+    properties.put("mail.smtp.port", port);
+    properties.put("mail.smtp.ssl.trust", sslTrust);
     return properties;
   }
 

@@ -1,21 +1,18 @@
-web:
-  cors:
-    allowed-origins: "*"
-    allowed-methods: GET
-    max-age: 3600
-    allowed-headers: "Requestor-Type"
-    exposed-headers: "X-Get-Header"
-
 email:
   username: "username"
   password: "password"
+  smtp:
+    host: "smtp.gmail.com"
+    port: 25
+    ssl:
+      trust: "smtp.gmail.com"
 
 std-gpt:
   base-url: "http://localhost:18080"
 
 logging:
   level:
-    root: debug
+    root: info
 
 server:
   port: 18081
