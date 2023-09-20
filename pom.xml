@@ -15,7 +15,7 @@
   <name>fitness-back</name>
   <description>fitness-back</description>
   <properties>
-    <java.version>20</java.version>
+    <java.version>21</java.version>
     <gpt-connector-commons.version>0.0.1-SNAPSHOT</gpt-connector-commons.version>
     <validation-api.version>2.0.1.Final</validation-api.version>
     <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>

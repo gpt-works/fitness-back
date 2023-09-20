@@ -3,6 +3,7 @@ package com.zonief.fitnessback.service;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
 import jakarta.mail.Multipart;
+import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeBodyPart;
 import jakarta.mail.internet.MimeMultipart;
@@ -25,6 +26,7 @@ public class EmailService {
       Multipart multipart = new MimeMultipart();
       multipart.addBodyPart(mimeBodyPart);
       message.setContent(multipart);
+      Transport.send(message);
     } catch (MessagingException e) {
       log.error("Error while sending email: {}", e.getMessage());
     }
